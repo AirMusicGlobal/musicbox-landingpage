@@ -300,7 +300,7 @@
         }
 
         function success() {
-            toast.innerHTML = 'Thanks for registrating! :)'
+            document.getElementById("toast").innerHTML = "Thanks for registrating! :)";
             submit.disabled = false
             submit.blur()
             form.name.focus()
@@ -311,13 +311,13 @@
         }
 
         function error(err) {
-            toast.innerHTML = 'There was an error while submiting your application.'
+            document.getElementById("toast").innerHTML = "There was an error while submiting your application.";
             submit.disabled = false
             console.log(err)
         }
         form.addEventListener('submit', function (e) {
             e.preventDefault()
-            toast.innerHTML = 'Sending'
+            document.getElementById("toast").innerHTML = 'Sending'
             submit.disabled = true
             const payload = {
                 name: form.name.value,
