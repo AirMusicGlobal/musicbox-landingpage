@@ -1101,7 +1101,7 @@ input[type=text] {
         width: 40%;
         height: auto;
     }
-
+   
     .images-section-3 {
 
         display: flex;
@@ -1297,7 +1297,9 @@ input[type=text] {
         font-style: normal;
         line-height: 120%;
     }
-
+   .parent-4 .child-2-2{
+        grid-area: 2 / 3 / 4 / 5 !important;
+   }
     .footer-nav li {
         margin-top: 20px;
     }
@@ -1355,11 +1357,18 @@ input[type=text] {
         width: 90% !important;
         height: auto;
     }
+    .changes{
+        width: 90% !important;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
 
     .form-image {
         width: 70% !important;
         height: auto;
     }
+    
 }
 
 @media only screen and (min-width: 950px) {
