@@ -233,7 +233,7 @@
                     sagittis semper. Rhoncus id eu diam congue elementum dui, ipsum. </p>
             </div>
             <div class="child-6-2">
-                <form class="form" id="contactForm">
+                <div class="form" id="contactForm">
                     <div>
                         <label for="name">Name</label>
                         <input id="name" type="text" placeholder="Name" required/>
@@ -245,8 +245,8 @@
                         <label for="email">Email</label>
                         <input id="email" type="email" placeholder="Email Address"  required/>
                     </div>
-                </form>
-                <button type="submit" class="submit" id="submit" onclick="post()">Sign in for BETA</button>
+                </div>
+                <button class="submit" id="submit" onclick="post()">Sign in for BETA</button>
                 <div class="toast"></div>
                 
             </div>
@@ -260,7 +260,7 @@
             <div class="foot-nav">
                 <ul class="footer-nav">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#streamm">Stream</a></li>
+                    <li><a href="#stream">Stream</a></li>
                     <li><a href="#listeners">Listeners</a></li>
                     <li><a href="#playlists">Playlists</a></li>
                     <li><a href="#login">Login</a></li>
@@ -279,12 +279,12 @@
     <script src="js/menu.js" defer></script>
     <script>
       
-        const form = document.getElementById('contactForm')
         const url = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
         const toast = document.getElementById('toast')
         const submit = document.getElementById('submit')
 
-        function post(url, body, callback) {
+        function post() {
+            var body={ "first_name": document.getElementById('name').value, "last_name": document.getElementById('surname').value, "email": document.getElementById('email').value };
             var req = new XMLHttpRequest();
             req.open("POST", url, true);
             req.setRequestHeader("Content-Type", "application/json");
