@@ -302,6 +302,7 @@
         function success() {
             document.getElementById("toast").innerHTML = "Thanks for registrating! :)";
             submit.disabled = false
+            console.log("Success");
             submit.blur()
             form.name.focus()
             form.name.value = ''
@@ -313,6 +314,7 @@
         function error(err) {
             document.getElementById("toast").innerHTML = "There was an error while submiting your application.";
             submit.disabled = false
+            console.log("greska");
             console.log(err)
         }
         form.addEventListener('submit', function (e) {
