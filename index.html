@@ -151,7 +151,7 @@
                     <li><a href="#Beta">BETA</a></li>
                 </ul>
             </div>
-            <div class="div4-1"><button>Login New</button> </div>
+            <div class="div4-1"><button>Login</button> </div>
         </div>
         <div class="parent-2">
             <div class="div1-2">
@@ -233,7 +233,7 @@
                     sagittis semper. Rhoncus id eu diam congue elementum dui, ipsum. </p>
             </div>
             <div class="child-6-2">
-                <div class="form" id="contactForm">
+                <form class="form" id="contactForm">
                     <div>
                         <label for="name">Name</label>
                         <input id="name" type="text" placeholder="Name" required/>
@@ -245,9 +245,9 @@
                         <label for="email">Email</label>
                         <input id="email" type="email" placeholder="Email Address"  required/>
                     </div>
-                </div>
-                <button class="submit" id="submit" onclick="post()">Sign in for BETA</button>
-                <div class="toast"></div>
+                </form>
+                <button type="submit" class="submit" id="submit" onclick="post()">Sign in for BETA</button>
+                <div id="toast"></div>
                 
             </div>
             <div class="child-6-3"><img src="images/desktop/image.webp" loading="lazy"> </div>
@@ -260,7 +260,7 @@
             <div class="foot-nav">
                 <ul class="footer-nav">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#stream">Stream</a></li>
+                    <li><a href="#streamm">Stream</a></li>
                     <li><a href="#listeners">Listeners</a></li>
                     <li><a href="#playlists">Playlists</a></li>
                     <li><a href="#login">Login</a></li>
@@ -279,20 +279,20 @@
     <script src="js/menu.js" defer></script>
     <script>
       
+        const form = document.getElementById('contactForm')
         const url = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
         const toast = document.getElementById('toast')
         const submit = document.getElementById('submit')
 
-        function post() {
-            var body={ "first_name": document.getElementById('name').value, "last_name": document.getElementById('surname').value, "email": document.getElementById('email').value };
+        function post(url, body, callback) {
             var req = new XMLHttpRequest();
             req.open("POST", url, true);
             req.setRequestHeader("Content-Type", "application/json");
             req.addEventListener("load", function () {
                 if (req.status < 400) {
-                    success()
+                    callback(null, JSON.parse(req.responseText));
                 } else {
-                    error()
+                    callback(new Error("Request failed: " + req.statusText));
                 }
             });
             req.send(JSON.stringify(body));
@@ -300,8 +300,7 @@
         }
 
         function success() {
-
-            document.getElementById('toast').innerHTML = "Thanks for registrating! :)";
+            toast.innerHTML = 'Thanks for registrating! :)'
             submit.disabled = false
             submit.blur()
             form.name.focus()
@@ -311,12 +310,27 @@
 
         }
 
-        function error() {
-            document.getElementById('toast').innerHTML = "There was an error while submiting your application.";
+        function error(err) {
+            toast.innerHTML = 'There was an error while submiting your application.'
             submit.disabled = false
             console.log(err)
         }
-        
+        form.addEventListener('submit', function (e) {
+            e.preventDefault()
+            toast.innerHTML = 'Sending'
+            submit.disabled = true
+            const payload = {
+                name: form.name.value,
+                surname: form.surname.value,
+                email: form.email.value
+            }
+            post(url, payload, function (err, res) {
+                if (err) {
+                    return error(err)
+                }
+                success()
+            })
+        })
     </script>
 </body>
 
