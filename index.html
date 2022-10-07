@@ -246,7 +246,7 @@
                         <input id="email" type="email" placeholder="Email Address"  required/>
                     </div>
                 </form>
-                <button type="submit" class="submit" id="submit">Sign in for BETA</button>
+                <button type="submit" class="submit" id="submit2">Sign in for BETA</button>
                 <div id="toast"></div>
                 
             </div>
@@ -282,7 +282,7 @@
         const form = document.getElementById('contactForm')
         const url = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
         const toast = document.getElementById('toast')
-        const submit = document.getElementById('submit')
+        const submit2 = document.getElementById('submit2')
 
         function post(url, body, callback) {
             var req = new XMLHttpRequest();
@@ -301,9 +301,9 @@
 
         function success() {
             document.getElementById("toast").innerHTML = "Thanks for registrating! :)";
-            submit.disabled = false
+            submit2.disabled = false
             console.log("Success");
-            submit.blur()
+            submit2.blur()
             form.name.focus()
             form.name.value = ''
             form.surname.value = ''
@@ -313,14 +313,14 @@
 
         function error(err) {
             document.getElementById("toast").innerHTML = "There was an error while submiting your application.";
-            submit.disabled = false
+            submit2.disabled = false
             console.log("greska");
             console.log(err)
         }
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit2', function (e) {
             e.preventDefault()
             document.getElementById("toast").innerHTML = 'Sending'
-            submit.disabled = true
+            submit2.disabled = true
             const payload = {
                 name: form.name.value,
                 surname: form.surname.value,
