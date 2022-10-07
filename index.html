@@ -316,22 +316,7 @@
             submit.disabled = false
             console.log(err)
         }
-        form.addEventListener('submit', function (e) {
-            e.preventDefault()
-            toast.innerHTML = 'Sending'
-            submit.disabled = true
-            const payload = {
-                name: form.name.value,
-                surname: form.surname.value,
-                email: form.email.value
-            }
-            post(url, payload, function (err, res) {
-                if (err) {
-                    return error(err)
-                }
-                success()
-            })
-        })
+        
     </script>
 </body>
 
