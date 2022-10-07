@@ -288,12 +288,11 @@
             var req = new XMLHttpRequest();
             req.open("POST", url, true);
             req.setRequestHeader("Content-Type", "application/json");
-            req.setRequestHeader("Access-Control-Allow-Origin", "*");
             req.addEventListener("load", function () {
                 if (req.status < 400) {
-                    callback(null, JSON.parse(req.responseText));
+                    success()
                 } else {
-                    callback(new Error("Request failed: " + req.statusText));
+                    error()
                 }
             });
             req.send(JSON.stringify(body));
@@ -311,7 +310,7 @@
 
         }
 
-        function error(err) {
+        function error() {
             toast.innerHTML =
                 'There was an error while submiting your application.'
             submit.disabled = false
