@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="css/fontovi.css" rel="stylesheet">
 </head>
+
 <body id="home">
     <div class="mobile">
         <div class="nav-container">
@@ -80,8 +81,9 @@
                 est neque nunc id. Eu rhoncus nulla in in commodo sapien laoreet. Non massa morbi dictumst nulla.
 
             </p>
-          
-            <div class="images-section-3">  <img src="images/earth.svg" loading="lazy" width="292" height="168" class="section-3-second-image changes"></div>
+
+            <div class="images-section-3"> <img src="images/earth.svg" loading="lazy" width="292" height="168"
+                    class="section-3-second-image changes"></div>
         </section>
         <div id="playlists3"></div>
         <section class="section-4">
@@ -186,7 +188,7 @@
         <div id="listeners2"></div>
         <div id="Listeners"></div>
         <div class="parent-4">
-            <div class="child-1-2"><img src="images/desktop/headphones.png" class="headphones" loading="lazy" >
+            <div class="child-1-2"><img src="images/desktop/headphones.png" class="headphones" loading="lazy">
                 <h1>know who are<br> your listeners</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc turpis enim dolor eu sed
                     etiam. Leo facilisi ut amet dictumst laoreet congue neque. </p>
@@ -200,13 +202,13 @@
                     Nisl nisl lectus enim sapien pharetra feugiat vitae pulvinar ut. Mauris, eget adipiscing vitae,
                     magna. Hac nunc mauris euismod egestas mi. Lectus. </p>
             </div>
-            <div class="child-2-2"><img src="images/desktop/listeners.webp" loading="lazy" > </div>
+            <div class="child-2-2"><img src="images/desktop/listeners.webp" loading="lazy"> </div>
 
         </div>
         <div></div>
         <div class="parent-5" id="Playlists">
-            <div class="child-5-1"><img src="images/desktop/playlists.webp" loading="lazy" > </div>
-            <div class="child-5-2"><img src="images/desktop/music-rhythm.png" loading="lazy" >
+            <div class="child-5-1"><img src="images/desktop/playlists.webp" loading="lazy"> </div>
+            <div class="child-5-2"><img src="images/desktop/music-rhythm.png" loading="lazy">
                 <h1>CREATE YOUR<br> PLAYLISTS</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc turpis enim dolor eu sed
                     etiam. Leo facilisi ut amet dictumst laoreet congue neque. </p>
@@ -231,23 +233,28 @@
                     sagittis semper. Rhoncus id eu diam congue elementum dui, ipsum. </p>
             </div>
             <div class="child-6-2">
-                <form class="form">
+                <form class="form" id="contactForm">
                     <div>
                         <label for="name">Name</label>
-                        <input id="name" type="text" placeholder="Name" />
+                        <input id="name" type="text" placeholder="Name" required/>
+                        <label for="surname">Surname</label>
+                        <input id="surname" type="text" placeholder="Surname" required/>
+                   
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input id="email" type="email" placeholder="Email Address" />
+                        <input id="email" type="email" placeholder="Email Address"  required/>
                     </div>
-
                 </form>
-                <input type="submit" value="Sign in for BETA" class="submit">
+                <button type="submit" class="submit" id="submit" onclick="post()">Sign in for BETA</button>
+                <div class="toast"></div>
+                
             </div>
-            <div class="child-6-3"><img src="images/desktop/image.webp" loading="lazy" > </div>
+            <div class="child-6-3"><img src="images/desktop/image.webp" loading="lazy"> </div>
         </div>
         <div class="parent-7">
-            <div class="info"> <img src="images/desktop/footer-image.svg" alt="Footer Info" width="294" height="176" loading="lazy" >
+            <div class="info"> <img src="images/desktop/footer-image.svg" alt="Footer Info" width="294" height="176"
+                    loading="lazy">
             </div>
 
             <div class="foot-nav">
@@ -270,6 +277,62 @@
         </div>
     </div>
     <script src="js/menu.js" defer></script>
+    <script>
+      
+        const form = document.getElementById('contactForm')
+        const url = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
+        const toast = document.getElementById('toast')
+        const submit = document.getElementById('submit')
+
+        function post(url, body, callback) {
+            var req = new XMLHttpRequest();
+            req.open("POST", url, true);
+            req.setRequestHeader("Content-Type", "application/json");
+            req.addEventListener("load", function () {
+                if (req.status < 400) {
+                    callback(null, JSON.parse(req.responseText));
+                } else {
+                    callback(new Error("Request failed: " + req.statusText));
+                }
+            });
+            req.send(JSON.stringify(body));
+   
+        }
+
+        function success() {
+            toast.innerHTML = 'Thanks for registrating! :)'
+            submit.disabled = false
+            submit.blur()
+            form.name.focus()
+            form.name.value = ''
+            form.surname.value = ''
+            form.email.value = ''
+
+        }
+
+        function error(err) {
+            toast.innerHTML =
+                'There was an error while submiting your application.'
+            submit.disabled = false
+            console.log(err)
+        }
+        form.addEventListener('submit', function (e) {
+            e.preventDefault()
+            toast.innerHTML = 'Sending'
+            submit.disabled = true
+            const payload = {
+                name: form.name.value,
+                surname: form.surname.value,
+                email: form.email.value
+            }
+            post(url, payload, function (err, res) {
+                if (err) {
+                    return error(err)
+                }
+                success()
+            })
+        })
+    </script>
 </body>
 
 </html>
