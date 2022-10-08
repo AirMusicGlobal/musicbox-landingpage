@@ -136,7 +136,7 @@ body {
     font-family: 'Archivo';
     font-style: normal;
     font-weight: 800;
-    font-size: 96px;
+    font-size: 56px;
     line-height: 100%;
     text-transform: uppercase;
     color: #FFFFFF;
@@ -580,7 +580,7 @@ input[type=text] {
 
     .div1-2 .second-heading {
 
-        font-size: 76px;
+        font-size: 46px;
 
     }
 }
