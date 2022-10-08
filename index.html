@@ -14,7 +14,7 @@
     <link href="css/fontovi.css" rel="stylesheet">
 </head>
 
-<body id="home">
+<body id="Home">
     <div class="mobile">
         <div class="nav-container">
             <a href="index.html">
@@ -30,12 +30,12 @@
             <div class="overlay" id="overlay">
                 <nav class="overlay-menu">
                     <ul class="gas">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#stream">Stream</a></li>
-                        <li><a href="#listeners3">Listeners</a></li>
-                        <li><a href="#playlists3">Playlists</a></li>
+                        <li><a href="#Home">Home</a></li>
+                        <li><a href="#mStream">Stream</a></li>
+                        <li><a href="#mListeners">Listeners</a></li>
+                        <li><a href="#mPlaylists">Playlists</a></li>
                     </ul>
-                    <button class="mobile-button">Sign in for BETA</button>
+                    <a href="#mBeta"><button class="mobile-button">Sign Up For Beta</button></a>
                 </nav>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </section>
-        <div id="stream"></div>
+        <div id="mStream"></div>
         <section class="section-2">
             <img src="images/microphone.png" loading="lazy" width="65" height="83" alt="Microphone" class="microphone">
             <h1>stream from <br>anywhere</h1>
@@ -69,7 +69,7 @@
             <img src="images/dashboard-2.webp" loading="lazy" width="616" height="395" alt="DashBoard 2"
                 class="section-2-second-image">
         </section>
-        <div id="listeners3"></div>
+        <div id="mListeners"></div>
         <section class="section-3">
             <img src="images/headphones.png" loading="lazy" width="71" height="71" alt="Microphone" class="headphones">
             <h1>know who are <br> your listeners</h1>
@@ -85,7 +85,7 @@
             <div class="images-section-3"> <img src="images/earth.svg" loading="lazy" width="292" height="168"
                     class="section-3-second-image changes"></div>
         </section>
-        <div id="playlists3"></div>
+        <div id="mPlaylists"></div>
         <section class="section-4">
             <img src="images/music-rhythm.png" loading="lazy" width="42" height="42" alt="Microphone"
                 class="headphones">
@@ -101,6 +101,7 @@
             <img src="images/desktop/heavy-metal.svg" loading="lazy" class="player" width="309" height="86">
             <img src="images/gallery.svg" loading="lazy" width="348" height="178" class="rest-images">
         </section>
+        <div id="mBeta"></div>
         <section class="section-5">
             <div class="empty"></div>
             <div class="cont">
@@ -117,7 +118,7 @@
                     <input type="text" id="surnameMobile" name="surname" placeholder="Surname"><br>
                     <label for="email">Email Address</label><br>
                     <input type="text" id="emailMobile" name="email" placeholder="Email Address">
-                    <button class="button-section-5" id="submitMobile" onclick="addUserForBetaMobile()">Sign in for
+                    <button class="button-section-5" id="submitMobile" onclick="addUserForBetaMobile()">Sign Up for
                         BETA</button>
                 </div>
                 <img src="images/form-image.webp" loading="lazy" class="form-image" width="243" height="187">
@@ -128,11 +129,11 @@
             <h1 class="heading-6">EVERYONE<br> CAN STREAM</h1>
             <img src="images/logo-footer.svg" loading="lazy" alt="Footer Logo" width="217" height="145">
             <ul class="footer-nav">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#stream">Stream</a></li>
-                <li><a href="#listeners3">Listeners</a></li>
-                <li><a href="#playlists3">Playlists</a></li>
-                <li><a href="#login">Login</a></li>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#mStream">Stream</a></li>
+                <li><a href="#mListeners">Listeners</a></li>
+                <li><a href="#mPlaylists">Playlists</a></li>
+                <li><a href="#mBeta">Login</a></li>
             </ul>
             <a href="https://butterflydesign.hr/" target="_blank">
                 <p> &copy;2022 ButterflyDesign. All rights reserved. </p>
@@ -154,7 +155,7 @@
                     <li><a href="#Beta">BETA</a></li>
                 </ul>
             </div>
-            <div class="div4-1"><button>Login</button> </div>
+            <div class="div4-1"><a href="#Beta"><button>Login</button></a> </div>
         </div>
         <div class="parent-2">
             <div class="div1-2">
@@ -249,7 +250,7 @@
                         <input id="email" type="email" placeholder="Email Address" required />
                     </div>
                 </form>
-                <button class="submit" id="submit" onClick="addUserForBeta()">Sign in for BETA</button>
+                <button class="submit" id="submit" onClick="addUserForBeta()">Sign Up for BETA</button>
                 <div id="toast"></div>
 
             </div>
@@ -262,11 +263,11 @@
 
             <div class="foot-nav">
                 <ul class="footer-nav">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#streamm">Stream</a></li>
-                    <li><a href="#listeners">Listeners</a></li>
-                    <li><a href="#playlists">Playlists</a></li>
-                    <li><a href="#login">Login</a></li>
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#Stream">Stream</a></li>
+                    <li><a href="#Listeners">Listeners</a></li>
+                    <li><a href="#Playlists">Playlists</a></li>
+                    <li><a href="#Beta">Login</a></li>
                 </ul>
             </div>
             <div class="moto">
@@ -305,7 +306,7 @@
             document.getElementById('submit').style.backgroundColor = "green";
             document.getElementById('submit').blur();
             setTimeout(function () {
-                document.getElementById('submit').innerHTML = "Sign in for BETA";
+                document.getElementById('submit').innerHTML = "Sign Up for BETA";
                 document.getElementById('submit').style.backgroundColor = "#fd8c4c";
                 form.name.focus()
                 form.name.value = ''
@@ -319,7 +320,7 @@
             document.getElementById('submit').style.backgroundColor = "red";
             document.getElementById('submit').blur();
             setTimeout(function () {
-                document.getElementById('submit').innerHTML = "Sign in for BETA";
+                document.getElementById('submit').innerHTML = "Sign Up for BETA";
                 document.getElementById('submit').style.backgroundColor = "#fd8c4c";
                 form.name.focus()
             }, 1500);
@@ -364,7 +365,7 @@
             document.getElementById('submitMobile').style.backgroundColor = "green";
             document.getElementById('submitMobile').blur();
             setTimeout(function () {
-                document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
+                document.getElementById('submitMobile').innerHTML = "Sign Up for BETA";
                 document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
                 document.getElementById('nameMobile').focus()
                 document.getElementById('nameMobile').value = ''
@@ -379,7 +380,7 @@
             document.getElementById('submitMobile').style.backgroundColor = "red";
             document.getElementById('submitMobile').blur();
             setTimeout(function () {
-                document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
+                document.getElementById('submitMobile').innerHTML = "Sign Up for BETA";
                 document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
                 document.getElementById('nameMobile').focus()
             }, 1500);
