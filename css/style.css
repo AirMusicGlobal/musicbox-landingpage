@@ -1162,7 +1162,7 @@ input[type=text] {
     }
 
     .spacing {
-        margin-bottom: 50px;
+       padding-bottom: 20px;
     }
 
     .section-4-second-image {
@@ -1248,10 +1248,11 @@ input[type=text] {
         line-height: 120%;
         margin-bottom: 20px;
     }
-
+    
     .section-5 img {
         display: block;
         margin: 0 auto;
+        width: 45% !important;
         margin-bottom: 30px;
     }
 
@@ -1319,7 +1320,9 @@ input[type=text] {
         padding-bottom: 12px;
     }
 }
-
+.last{
+    padding-bottom: 20px;
+}
 @media only screen and (max-width:650px) {
     .microphone {
         width: 10% !important;
