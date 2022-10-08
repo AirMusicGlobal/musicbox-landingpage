@@ -110,15 +110,16 @@
                     Est nec non nunc, feugiat posuere amet massa sagittis semper. Rhoncus id eu diam congue elementum
                     dui,
                     ipsum. </p>
-                <form class="form" id="contactFormMobile">
+                <div class="form" id="contactFormMobile">
                     <label for="name">Name</label><br>
-                    <input type="text" id="name" name="name" placeholder="Name"><br>
+                    <input type="text" id="nameMobile" name="name" placeholder="Name"><br>
                     <label for="surname">Surname</label><br>
-                    <input type="text" id="surname" name="surname" placeholder="Surname"><br>
+                    <input type="text" id="surnameMobile" name="surname" placeholder="Surname"><br>
                     <label for="email">Email Address</label><br>
-                    <input type="text" id="email" name="email" placeholder="Email Address">
-                    <button class="button-section-5" id="submitMobile" onclick="addUserForBetaMobile()">Sign in for BETA</button>
-                </form>
+                    <input type="text" id="emailMobile" name="email" placeholder="Email Address">
+                    <button class="button-section-5" id="submitMobile" onclick="addUserForBetaMobile()">Sign in for
+                        BETA</button>
+                </div>
                 <img src="images/form-image.webp" loading="lazy" class="form-image" width="243" height="187">
             </div>
         </section>
@@ -302,6 +303,7 @@
         function success() {
             document.getElementById('submit').innerHTML = "Thanks for registering! :)";
             document.getElementById('submit').style.backgroundColor = "green";
+            document.getElementById('submit').blur();
             setTimeout(function () {
                 document.getElementById('submit').innerHTML = "Sign in for BETA";
                 document.getElementById('submit').style.backgroundColor = "#fd8c4c";
@@ -309,17 +311,18 @@
                 form.name.value = ''
                 form.surname.value = ''
                 form.email.value = ''
-            }, 2000);
+            }, 1500);
         }
 
         function error(err) {
             document.getElementById('submit').innerHTML = "There was an error while submiting your application.";
             document.getElementById('submit').style.backgroundColor = "red";
+            document.getElementById('submit').blur();
             setTimeout(function () {
                 document.getElementById('submit').innerHTML = "Sign in for BETA";
                 document.getElementById('submit').style.backgroundColor = "#fd8c4c";
                 form.name.focus()
-            }, 2000);
+            }, 1500);
         }
 
         function addUserForBeta() {
@@ -337,9 +340,8 @@
             })
         };
     </script>
-     <script>
+    <script>
 
-        const formMobile = document.getElementById('contactFormMobile')
         const urlMobile = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
 
         function postMobile(url, body, callback) {
@@ -360,32 +362,35 @@
         function successMobile() {
             document.getElementById('submitMobile').innerHTML = "Thanks for registering! :)";
             document.getElementById('submitMobile').style.backgroundColor = "green";
+            document.getElementById('submitMobile').blur();
             setTimeout(function () {
                 document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
                 document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
-                formMobile.name.focus()
-                formMobile.name.value = ''
-                formMobile.surname.value = ''
-                formMobile.email.value = ''
-            }, 2000);
+                document.getElementById('nameMobile').focus()
+                document.getElementById('nameMobile').value = ''
+                document.getElementById('surnameMobile').value = ''
+                document.getElementById('emailMobile').value = ''
+
+            }, 1500);
         }
 
         function errorMobile(err) {
             document.getElementById('submitMobile').innerHTML = "There was an error while submiting your application.";
             document.getElementById('submitMobile').style.backgroundColor = "red";
+            document.getElementById('submitMobile').blur();
             setTimeout(function () {
                 document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
                 document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
-                form.name.focus()
-            }, 2000);
+                document.getElementById('nameMobile').focus()
+            }, 1500);
         }
 
         function addUserForBetaMobile() {
             document.getElementById('submitMobile').innerHTML = 'Sending'
             const payload = {
-                "first_name": formMobile.name.value,
-                "last_name": formMobile.surname.value,
-                "email": formMobile.email.value
+                "first_name": document.getElementById('nameMobile').value,
+                "last_name": document.getElementById('surnameMobile').value,
+                "email": document.getElementById('emailMobile').value
             }
             postMobile(urlMobile, payload, function (err, res) {
                 if (err) {
