@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MusicBox</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/jquery/jquery-3.6.1.min.js" defer></script>
+    <script src="./js/jquery/jquery-3.6.1.min.js" defer></script>
     <link rel="shortcut icon" href="images/logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,12 +110,14 @@
                     Est nec non nunc, feugiat posuere amet massa sagittis semper. Rhoncus id eu diam congue elementum
                     dui,
                     ipsum. </p>
-                <form class="form">
-                    <label for="fname">Name</label><br>
-                    <input type="text" id="fname" name="fname" placeholder="Name"><br>
-                    <label for="lname">Email Address</label><br>
-                    <input type="text" id="lname" name="lname" placeholder="Email Address">
-                    <button class="button-section-5" type="submit">Sign in for BETA</button>
+                <form class="form" id="contactFormMobile">
+                    <label for="name">Name</label><br>
+                    <input type="text" id="name" name="name" placeholder="Name"><br>
+                    <label for="surname">Surname</label><br>
+                    <input type="text" id="surname" name="surname" placeholder="Surname"><br>
+                    <label for="email">Email Address</label><br>
+                    <input type="text" id="email" name="email" placeholder="Email Address">
+                    <button class="button-section-5" id="submitMobile" onclick="addUserForBetaMobile()">Sign in for BETA</button>
                 </form>
                 <img src="images/form-image.webp" loading="lazy" class="form-image" width="243" height="187">
             </div>
@@ -236,19 +238,19 @@
                 <form class="form" id="contactForm">
                     <div>
                         <label for="name">Name</label>
-                        <input id="name" type="text" placeholder="Name" required/>
+                        <input id="name" type="text" placeholder="Name" required />
                         <label for="surname">Surname</label>
-                        <input id="surname" type="text" placeholder="Surname" required/>
-                   
+                        <input id="surname" type="text" placeholder="Surname" required />
+
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input id="email" type="email" placeholder="Email Address"  required/>
+                        <input id="email" type="email" placeholder="Email Address" required />
                     </div>
                 </form>
-                <button type="submit" class="submit" id="submit2">Sign in for BETA</button>
+                <button class="submit" id="submit" onClick="addUserForBeta()">Sign in for BETA</button>
                 <div id="toast"></div>
-                
+
             </div>
             <div class="child-6-3"><img src="images/desktop/image.webp" loading="lazy"> </div>
         </div>
@@ -278,11 +280,9 @@
     </div>
     <script src="js/menu.js" defer></script>
     <script>
-      
+
         const form = document.getElementById('contactForm')
         const url = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
-        const toast = document.getElementById('toast')
-        const submit2 = document.getElementById('submit2')
 
         function post(url, body, callback) {
             var req = new XMLHttpRequest();
@@ -296,35 +296,38 @@
                 }
             });
             req.send(JSON.stringify(body));
-   
+
         }
 
         function success() {
-            document.getElementById("toast").innerHTML = "Thanks for registrating! :)";
-            submit2.disabled = false
-            console.log("Success");
-            submit2.blur()
-            form.name.focus()
-            form.name.value = ''
-            form.surname.value = ''
-            form.email.value = ''
-
+            document.getElementById('submit').innerHTML = "Thanks for registering! :)";
+            document.getElementById('submit').style.backgroundColor = "green";
+            setTimeout(function () {
+                document.getElementById('submit').innerHTML = "Sign in for BETA";
+                document.getElementById('submit').style.backgroundColor = "#fd8c4c";
+                form.name.focus()
+                form.name.value = ''
+                form.surname.value = ''
+                form.email.value = ''
+            }, 2000);
         }
 
         function error(err) {
-            document.getElementById("toast").innerHTML = "There was an error while submiting your application.";
-            submit2.disabled = false
-            console.log("greska");
-            console.log(err)
+            document.getElementById('submit').innerHTML = "There was an error while submiting your application.";
+            document.getElementById('submit').style.backgroundColor = "red";
+            setTimeout(function () {
+                document.getElementById('submit').innerHTML = "Sign in for BETA";
+                document.getElementById('submit').style.backgroundColor = "#fd8c4c";
+                form.name.focus()
+            }, 2000);
         }
-        form.addEventListener('submit2', function (e) {
-            e.preventDefault()
-            document.getElementById("toast").innerHTML = 'Sending'
-            submit2.disabled = true
+
+        function addUserForBeta() {
+            document.getElementById('submit').innerHTML = 'Sending'
             const payload = {
-                name: form.name.value,
-                surname: form.surname.value,
-                email: form.email.value
+                "first_name": form.name.value,
+                "last_name": form.surname.value,
+                "email": form.email.value
             }
             post(url, payload, function (err, res) {
                 if (err) {
@@ -332,7 +335,65 @@
                 }
                 success()
             })
-        })
+        };
+    </script>
+     <script>
+
+        const formMobile = document.getElementById('contactFormMobile')
+        const urlMobile = 'https://pz6jlmb0vl.execute-api.eu-west-3.amazonaws.com/dev/add-member'
+
+        function postMobile(url, body, callback) {
+            var req = new XMLHttpRequest();
+            req.open("POST", url, true);
+            req.setRequestHeader("Content-Type", "application/json");
+            req.addEventListener("load", function () {
+                if (req.status < 400) {
+                    callback(null, JSON.parse(req.responseText));
+                } else {
+                    callback(new Error("Request failed: " + req.statusText));
+                }
+            });
+            req.send(JSON.stringify(body));
+
+        }
+
+        function successMobile() {
+            document.getElementById('submitMobile').innerHTML = "Thanks for registering! :)";
+            document.getElementById('submitMobile').style.backgroundColor = "green";
+            setTimeout(function () {
+                document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
+                document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
+                formMobile.name.focus()
+                formMobile.name.value = ''
+                formMobile.surname.value = ''
+                formMobile.email.value = ''
+            }, 2000);
+        }
+
+        function errorMobile(err) {
+            document.getElementById('submitMobile').innerHTML = "There was an error while submiting your application.";
+            document.getElementById('submitMobile').style.backgroundColor = "red";
+            setTimeout(function () {
+                document.getElementById('submitMobile').innerHTML = "Sign in for BETA";
+                document.getElementById('submitMobile').style.backgroundColor = "#fd8c4c";
+                form.name.focus()
+            }, 2000);
+        }
+
+        function addUserForBetaMobile() {
+            document.getElementById('submitMobile').innerHTML = 'Sending'
+            const payload = {
+                "first_name": formMobile.name.value,
+                "last_name": formMobile.surname.value,
+                "email": formMobile.email.value
+            }
+            postMobile(urlMobile, payload, function (err, res) {
+                if (err) {
+                    return errorMobile(err)
+                }
+                successMobile()
+            })
+        };
     </script>
 </body>
 
